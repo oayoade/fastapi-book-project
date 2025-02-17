@@ -1,0 +1,20 @@
+{
+  "family": "books-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "256",
+  "memory": "512",
+  "containerDefinitions": [
+    {
+      "name": "mbooks-fastapi-container",
+      "image": "132088440811.dkr.ecr.us-east-1.amazonaws.com/olu_namespace/books_fastapi:latest",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ]
+}
