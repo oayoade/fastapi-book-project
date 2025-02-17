@@ -16,6 +16,13 @@ app.add_middleware(
 
 app.include_router(api_router, prefix=settings.API_PREFIX)
 
+@app.get("/books/{book_id}", response_model=Book)
+async def get_book(book_id: int):
+    book = db.get_book(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return book
+
 
 @app.get("/healthcheck")
 async def health_check():
