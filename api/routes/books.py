@@ -34,6 +34,14 @@ db.books = {
 }
 
 
+@router.get("/{book_id}", response_model=Book)
+async def get_book(book_id: int):
+    """Retrieves a book by its ID."""
+    book = db.get_book(book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    return book
+
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_book(book: Book):
     db.add_book(book)
